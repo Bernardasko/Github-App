@@ -1,7 +1,11 @@
 import { IoSearch } from "react-icons/io5";
-const Search = () => {
+import { useState } from "react";
+const Search = ({ onSearch }) => {
+  const [username, setUsername] = useState("");
   return (
-    <form className="max-w-xl mx-auto p-2 sm:w-72">
+    <form 
+    onSubmit={(e) => onSearch(e,username)}
+    className="max-w-xl mx-auto p-2">
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only"
@@ -18,6 +22,8 @@ const Search = () => {
           className="block w-full p-4 pl-10 text-sm rounded-lg bg-glass rounded-lgfocus:ring-blue-500 focus:border-blue-500 bg-transparent focus:bg-transparent"
           placeholder="i.e hognsberg"
           required
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
         />
         <button
           type="submit"

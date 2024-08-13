@@ -4,22 +4,12 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiUserFollowFill } from "react-icons/ri";
 import { RiGitRepositoryFill } from "react-icons/ri";
+import moment from 'moment';
 
-const ProfileInfo = () => {
-  const userProfile = {
-    avatar_url: "https://avatars.githubusercontent.com/u/11111111?v=4",
-    bio: "🧑‍🔬🧑‍🔬🧑‍🔬",
-    email: "HJQ0U@example.com",
-    followers: 10,
-    following: 10,
-    html_url: "https://github.com/bernardasko",
-    location: "Copenhagen",
-    name: "Bernardas Ko",
-    public_gists: 100,
-    public_repos: 100,
-    twitter_username: "bernardasko",
-    login: "bernardasko",
-  };
+
+const ProfileInfo = ({ userProfile }) => {
+  const memberSince = moment(userProfile?.created_at).format("ll");
+
   return (
     <div className="lg:w-1/3 w-full flex flex-col gap-2 md:sticky md:top-10">
       <div className="bg-glass rounded-lg p-4">
@@ -76,7 +66,7 @@ const ProfileInfo = () => {
         {/* Member Since Date */}
         <div className="my-2">
           <p className="text-sm font-bold text-gray-600">Member since</p>
-          <p>21 Sep, 2021</p>
+          <p>{memberSince}</p>
         </div>
         {/* Email address */}
         <div className="my-2">
