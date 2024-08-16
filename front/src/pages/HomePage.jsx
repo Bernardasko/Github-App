@@ -13,23 +13,38 @@ const Homepage = () => {
   const [sortType, setSortType] = useState("recent");
 
   const getUserProfileAndRepos = useCallback(
-    async (username = "bernardasko") => {
-      setLoading(true);
-      try {
-       const res = await fetch(`http://localhost:5000/api/users/profile/${username}`);
-       const { userProfile, repos } = await res.json();
+  async (username = "bernardasko") => {
+    setLoading(true);
+    try {
+      const res = await fetch(`http://localhost:5000/api/users/profile/${username}`);
+      
+      // Check if response is ok (status code 200-299)
+      if (!res.ok) throw new Error("Failed to fetch user profile");
 
-        repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); //descending, recent first
+      const data = await res.json();
 
-        setRepos(repos);
-        setUserProfile(userProfile);
-        return { userProfile, repos };
-      } catch (error) {
-        toast.error(error.message);
-      } finally {
-        setLoading(false);
+      // Validate data structure
+      if (!data || !data.userProfile || !data.repos) {
+        throw new Error("Invalid data format from API");
       }
-    },[]);
+
+      const { userProfile, repos } = data;
+
+      // Sort repositories by date (most recent first)
+      repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      setRepos(repos);
+      setUserProfile(userProfile);
+      
+      return { userProfile, repos };
+      
+    } catch (error) {
+      toast.error(error.message || "An error occurred while fetching the user data.");
+      return { userProfile: null, repos: [] }; // Return empty objects to prevent destructuring errors
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
 
   useEffect(() => {
     getUserProfileAndRepos();

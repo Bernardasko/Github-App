@@ -1,13 +1,11 @@
 import express from "express";
-import { getUserProfileAndRepos } from "../controllers/user.controller.js";
-import { explorePopularRepos } from "../controllers/explore.controller.js";
+import { getUserProfileAndRepos, likeProfile, getLikes } from "../controllers/user.controller.js";
+import { ensureAuthenticated } from "../middleware/ensureAuthenticate.js";
 
 const router = express.Router();
 
 router.get("/profile/:username", getUserProfileAndRepos);
-router.get("/explore/", explorePopularRepos);
-
-// TODO => GET likes (who liked our profile)
-// TODO => post like a profile
+router.get("/likes", ensureAuthenticated, getLikes);
+router.post("/like/:username", ensureAuthenticated, likeProfile);
 
 export default router;

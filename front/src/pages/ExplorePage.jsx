@@ -15,7 +15,7 @@ const ExplorePage = () => {
        "http://localhost:5000/api/explore/repos/" + language,
         {
           headers: {
-            authorization: `token ${import.meta.env.VITE_GITHUB_API_KEY}`,
+            authorization: `token ${import.meta.env.GITHUB_API_KEY}`,
           },
         }
       );

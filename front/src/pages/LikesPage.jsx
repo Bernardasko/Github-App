@@ -1,6 +1,27 @@
 import { FaHeart } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 const LikesPage = () => {
+  const [likes, setLikes] = useState([]);
+
+  useEffect(() => {
+    const getLikes = async () => {
+      try {
+        const res = await fetch("/api/users/likes", {
+          credentials: "include",
+        });
+        const data = await res.json();
+        console.log(data);
+        
+        setLikes(data.likedBy);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+    getLikes();
+  }, []);
+  
   return (
     <div className="relative overflow-x-hidden shadow-md rounded-lg px-4">
       <table className="w-full text-sm text-left rtl:text-right bg-glass overflow-hidden">

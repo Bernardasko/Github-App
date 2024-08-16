@@ -33,7 +33,7 @@ passport.use(
           username: profile.username,
           profileUrl: profile.profileUrl,
           avatarUrl: profile.photos[0].value,
-          likedProfile: [],
+          likedProfiles: [],
           likedBy: [],
         });
         await newUser.save();

@@ -1,42 +1,45 @@
 import mongoose from "mongoose";
 
-const useSchema = new mongoose.Schema({
+const useSchema = new mongoose.Schema(
+  {
     username: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     name: {
-        type: String,
-        default: "",
+      type: String,
+      default: "",
     },
     profileUrl: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     avatarUrl: {
-        type: String,
+      type: String,
     },
-    likedProfile: {
-        type: [String],
-        default: [],
+    likedProfiles: {
+      type: [String],
+      default: [],
     },
     likedBy: [
-        {
-            username: {
-                type: String,
-                required: true
-            },
-            avatarUrl: {
-                type: String,
-            },
-            likedDate: {
-                type: Date,
-                default: Date.now
-            }
-        }
+      {
+        username: {
+          type: String,
+          required: true,
+        },
+        avatarUrl: {
+          type: String,
+        },
+        likedDate: {
+          type: Date,
+          default: Date.now,
+        },
+      },
     ],
-},{timestamps: true});
+  },
+  { timestamps: true }
+);
 
 const User = mongoose.model("User", useSchema);
 

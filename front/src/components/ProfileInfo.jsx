@@ -8,6 +8,7 @@ import moment from 'moment';
 import LikeProfile from "./LikeProfile";
 
 const ProfileInfo = ({ userProfile }) => {
+  
   const memberSince = moment(userProfile?.created_at).format("ll");
 
   return (
