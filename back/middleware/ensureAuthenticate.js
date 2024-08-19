@@ -1,6 +1,6 @@
 export async function ensureAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        next();
-    } 
-    return res.status(401).json({ error: "Unauthorized" });
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: "Unauthorized" });
 }

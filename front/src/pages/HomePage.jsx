@@ -16,7 +16,7 @@ const Homepage = () => {
   async (username = "bernardasko") => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/users/profile/${username}`);
+      const res = await fetch(`/api/users/profile/${username}`);
       
       // Check if response is ok (status code 200-299)
       if (!res.ok) throw new Error("Failed to fetch user profile");

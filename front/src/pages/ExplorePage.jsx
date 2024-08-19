@@ -12,7 +12,7 @@ const ExplorePage = () => {
     setRepos([]);
     try {
       const res = await fetch(
-       "http://localhost:5000/api/explore/repos/" + language,
+       "/api/explore/repos/" + language,
         {
           headers: {
             authorization: `token ${import.meta.env.GITHUB_API_KEY}`,

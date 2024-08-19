@@ -16,7 +16,7 @@ export const AuthContextProvider = ({ children }) => {
     const checkUserLogin = async () => {
       setLoading(true);
       try {
-        const res = await fetch("/api/auth/check", { credentials: "include",});
+        const res = await fetch("/api/auth/check", { credentials: "include"});
         const data = await res.json();
         setAuthUser(data.user); // null or authenticated user object
       } catch (error) {
@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
     checkUserLogin();
   }, []);
   return (
-    <AuthContext.Provider value={{ authUser, setAuthUser }}>
+    <AuthContext.Provider value={{ authUser, setAuthUser, loading }}>
       {children}
     </AuthContext.Provider>
   );
